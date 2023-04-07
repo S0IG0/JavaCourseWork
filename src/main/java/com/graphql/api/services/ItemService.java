@@ -5,5 +5,6 @@ import com.graphql.api.models.Item;
 import java.util.List;
 
 public interface ItemService {
-    public List<Item> findAllItems();
+    List<Item> findAllItems();
+    Item createItem(Item item);
 }
