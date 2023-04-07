@@ -3,6 +3,8 @@ package com.graphql.api.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Entity
 @Data
 public class Item {
@@ -11,4 +13,9 @@ public class Item {
     private Long id;
     @Column
     private String name;
+    @Column
+    private String description;
+    @Column
+    private BigDecimal price;
+
 }
