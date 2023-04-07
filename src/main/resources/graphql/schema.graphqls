@@ -7,8 +7,20 @@ schema {
 type Item {
     id: ID!
     name: String
+    description: String
+    price: Float
+}
+
+input ItemInput {
+    name: String
+    description: String
+    price: Float
 }
 
 type Query {
     findAllItems: [Item]
+}
+
+type Mutation {
+    createItem(item: ItemInput!): Item
 }
