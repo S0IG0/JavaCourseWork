@@ -6,9 +6,28 @@ schema {
 
 type Item {
     id: ID!
-    name: String
-    description: String
-    price: Float
+    name: String!
+    description: String!
+    price: Float!
+}
+
+type JwtResponse {
+    accessToken: String!
+    refreshToken: String!
+}
+
+type Role {
+    id: ID!
+    name: String!
+}
+
+type User {
+    id: ID!
+    username: String!
+    firstname: String!
+    lastname: String!
+    email: String!
+    roles: [Role]
 }
 
 input ItemInput {
@@ -17,10 +36,30 @@ input ItemInput {
     price: Float
 }
 
+input JwtRequest {
+    username: String
+    password: String
+}
+
+input JwtRefreshRequest {
+    refreshToken: String
+}
+
+input UserInput {
+    username: String!
+    firstname: String!
+    lastname: String!
+    email: String!
+    password: String!
+}
+
 type Query {
     findAllItems: [Item]
+    login(jwtRequest: JwtRequest!): JwtResponse
+    refreshAccessToken(jwtRefreshRequest: JwtRefreshRequest!): JwtResponse
 }
 
 type Mutation {
     createItem(item: ItemInput!): Item
+    createUser(user: UserInput!): User
 }

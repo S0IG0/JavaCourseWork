@@ -1,4 +1,4 @@
-package com.graphql.api.models;
+package com.graphql.api.shop.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
