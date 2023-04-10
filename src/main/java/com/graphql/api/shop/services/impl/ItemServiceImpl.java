@@ -1,8 +1,8 @@
-package com.graphql.api.services.impl;
+package com.graphql.api.shop.services.impl;
 
-import com.graphql.api.models.Item;
-import com.graphql.api.repositories.ItemRepository;
-import com.graphql.api.services.ItemService;
+import com.graphql.api.shop.models.Item;
+import com.graphql.api.shop.repositories.ItemRepository;
+import com.graphql.api.shop.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,11 +1,12 @@
-package com.graphql.api.controllers;
+package com.graphql.api.shop.controllers;
 
-import com.graphql.api.models.Item;
-import com.graphql.api.services.ItemService;
+import com.graphql.api.shop.models.Item;
+import com.graphql.api.shop.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -26,6 +27,7 @@ public class ItemController {
         return itemService.findAllItems();
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @MutationMapping
     public Item createItem(@Argument Item item) {
         return itemService.createItem(item);

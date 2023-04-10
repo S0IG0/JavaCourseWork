@@ -1,6 +1,6 @@
-package com.graphql.api.services;
+package com.graphql.api.shop.services;
 
-import com.graphql.api.models.Item;
+import com.graphql.api.shop.models.Item;
 
 import java.util.List;
 
