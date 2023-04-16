@@ -1,14 +1,7 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
+# This file was generated based on ".graphql-config". Do not edit manually.
 
 schema {
     query: Query
-}
-
-type Item {
-    id: ID!
-    name: String!
-    description: String!
-    price: Float!
 }
 
 type JwtResponse {
@@ -30,19 +23,61 @@ type User {
     roles: [Role]
 }
 
-input ItemInput {
-    name: String
-    description: String
-    price: Float
+type Category {
+    id: ID!
+    parentCategory: Category
+    name: String!
+}
+
+type Image {
+    id: ID!
+    name: String!
+}
+
+type ComputerComponent {
+    id: ID!
+    companyName: String!
+    categories: [Category]!
+    images: [Image]!
+}
+
+type RelationOrdersToComputerComponents {
+    id: ID!
+    computerComponent: ComputerComponent
+    count: Int
+}
+
+type Order {
+    id: ID!
+    createDate: String!
+    relationOrdersToComputerComponents: [RelationOrdersToComputerComponents]!
+}
+
+type Customer {
+    id: ID!
+    address: String!
+    telephone: String!
+    user: User!
+    order: Order!
+}
+
+type Publisher {
+    id: ID!
+    nameCompany: String!
+    addressCompany: String!
+    activitiesCompany: String!
+    positionInCompany: String!
+    user: User!
+    computerComponents: [ComputerComponent]!
 }
 
 input JwtRequest {
-    username: String
-    password: String
+    username: String!
+    password: String!
 }
 
 input JwtRefreshRequest {
-    refreshToken: String
+    refreshToken: String!
 }
 
 input UserInput {
@@ -53,13 +88,29 @@ input UserInput {
     password: String!
 }
 
+input CustomerInput {
+    address: String!
+    telephone: String!
+    user: UserInput!
+}
+
+input PublisherInput {
+    nameCompany: String!
+    addressCompany: String!
+    activitiesCompany: String!
+    positionInCompany: String!
+    user: UserInput!
+}
+
 type Query {
-    findAllItems: [Item]
-    login(jwtRequest: JwtRequest!): JwtResponse
-    refreshAccessToken(jwtRefreshRequest: JwtRefreshRequest!): JwtResponse
+    findAllComputerComponent: [ComputerComponent]!
 }
 
 type Mutation {
-    createItem(item: ItemInput!): Item
+    login(jwtRequest: JwtRequest!): JwtResponse
+    refreshAccessToken(jwtRefreshRequest: JwtRefreshRequest!): JwtResponse
+
     createUser(user: UserInput!): User
+    createCustomer(customer: CustomerInput!): Customer
+    createPublisher(publisher: PublisherInput!): Publisher
 }
