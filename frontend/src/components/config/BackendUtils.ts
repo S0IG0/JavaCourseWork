@@ -1,5 +1,5 @@
-// const backendAddress: string = '192.168.1.83';
-const backendAddress: string = 'localhost';
+const HOST: string | undefined = process.env.REACT_APP_HOST
+const backendAddress: string = HOST ? HOST : 'localhost';
 export const secretKeyForAuthorization = 'Bearer';
 enum Paths {
     GRAPHQL = 'graphql',

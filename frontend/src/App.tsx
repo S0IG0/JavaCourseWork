@@ -7,6 +7,7 @@ import {SwitchTheme} from "./components/ui/SwitchTheme";
 import {Context} from "./index";
 import {refreshAccessToken} from "./components/graphql/mutation";
 import {useMutation} from "@apollo/client";
+// import dotenv from 'dotenv';
 
 function App() {
     const {store} = useContext(Context);
@@ -22,7 +23,10 @@ function App() {
         } else {
             document.documentElement.setAttribute('data-bs-theme', 'light')
         }
+        // dotenv.config();
 
+        console.log('process.env', process.env)
+        console.log('process.env.REACT_APP_HOST', process.env.REACT_APP_HOST)
 
         if (store.data.refreshToken) {
             refresh({
