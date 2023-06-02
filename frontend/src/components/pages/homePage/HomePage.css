@@ -1,0 +1,21 @@
+.cards {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+
+._card {
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+._card:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+._card:active {
+    transform: scale(1);
+    transition: 0.25s;
+}

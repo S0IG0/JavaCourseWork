@@ -1,0 +1,81 @@
+query FindAllComputerComponent {
+    findAllComputerComponent {
+        id,
+        name,
+        description,
+        price,
+        previewImage {
+            id
+        }
+    }
+}
+
+query FindComputerComponentById($id: Int!){
+    findComputerComponentById(id: $id) {
+        id,
+        name,
+        description,
+        price,
+        companyName,
+        previewImage {
+            id,
+        }
+        images {
+            id,
+        }
+    }
+}
+
+query GetUserByRefreshToken($jwtRefreshRequest: JwtRefreshRequest!){
+    getUserByRefreshToken(jwtRefreshRequest: $jwtRefreshRequest) {
+        id,
+        username,
+        email,
+        firstname,
+        lastname,
+        roles {
+            id,
+            name,
+        }
+    }
+}
+
+query GetCustomerByRefreshToken($jwtRefreshRequest: JwtRefreshRequest!){
+    getCustomerByRefreshToken(jwtRefreshRequest: $jwtRefreshRequest) {
+        id,
+        address,
+        telephone,
+        user {
+            id,
+            username,
+            email,
+            firstname,
+            lastname,
+            roles {
+                id,
+                name,
+            }
+        }
+    }
+}
+
+query GetPublisherByRefreshToken($jwtRefreshRequest: JwtRefreshRequest!) {
+    getPublisherByRefreshToken(jwtRefreshRequest: $jwtRefreshRequest) {
+        id,
+        positionInCompany,
+        addressCompany,
+        nameCompany,
+        activitiesCompany,
+        user {
+            id,
+            username,
+            email,
+            firstname,
+            lastname,
+            roles {
+                id,
+                name,
+            }
+        }
+    }
+}

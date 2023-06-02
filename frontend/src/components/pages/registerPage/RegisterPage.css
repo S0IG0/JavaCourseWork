@@ -1,0 +1,8 @@
+.divFlex {
+    display: flex;
+}
+
+.itemInCarousel {
+    min-height: 470px;
+    padding: 20px;
+}

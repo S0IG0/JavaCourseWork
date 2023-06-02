@@ -1,0 +1,127 @@
+# This file was generated based on ".graphql-config". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type JwtResponse {
+    accessToken: String!
+    refreshToken: String!
+}
+
+type Role {
+    id: ID!
+    name: String!
+}
+
+type User {
+    id: ID!
+    username: String!
+    firstname: String!
+    lastname: String!
+    email: String!
+    roles: [Role]
+}
+
+type Category {
+    id: ID!
+    parentCategory: Category
+    name: String!
+}
+
+type Image {
+    id: ID!
+    name: String!
+}
+
+type ComputerComponent {
+    id: ID!
+    name: String!
+    description: String!
+    price: Float!
+    companyName: String!
+    categories: [Category]!
+    images: [Image]!
+    previewImage: Image!
+}
+
+type RelationOrdersToComputerComponents {
+    id: ID!
+    computerComponent: ComputerComponent
+    count: Int
+}
+
+type Order {
+    id: ID!
+    createDate: String!
+    relationOrdersToComputerComponents: [RelationOrdersToComputerComponents]!
+}
+
+type Customer {
+    id: ID!
+    address: String!
+    telephone: String!
+    user: User!
+    order: Order!
+}
+
+type Publisher {
+    id: ID!
+    nameCompany: String!
+    addressCompany: String!
+    activitiesCompany: String!
+    positionInCompany: String!
+    user: User!
+    computerComponents: [ComputerComponent]!
+}
+
+input JwtRequest {
+    username: String!
+    password: String!
+}
+
+input JwtRefreshRequest {
+    refreshToken: String!
+}
+
+input UserInput {
+    username: String!
+    firstname: String!
+    lastname: String!
+    email: String!
+    password: String!
+}
+
+input CustomerInput {
+    address: String!
+    telephone: String!
+    user: UserInput!
+}
+
+input PublisherInput {
+    nameCompany: String!
+    addressCompany: String!
+    activitiesCompany: String!
+    positionInCompany: String!
+    user: UserInput!
+}
+
+type Query {
+    findAllComputerComponent: [ComputerComponent]!
+    findComputerComponentById(id: Int!) : ComputerComponent
+    getUserByRefreshToken(jwtRefreshRequest: JwtRefreshRequest!): User
+    getCustomerByRefreshToken(jwtRefreshRequest: JwtRefreshRequest!): Customer
+    getPublisherByRefreshToken(jwtRefreshRequest: JwtRefreshRequest!): Publisher
+}
+
+type Mutation {
+    login(jwtRequest: JwtRequest!): JwtResponse
+    refreshAccessToken(jwtRefreshRequest: JwtRefreshRequest!): JwtResponse
+
+    logout(refreshToken: String!): String
+    logoutAllSessions(refreshToken: String!): String
+
+    createUser(user: UserInput!): User
+    createCustomer(customer: CustomerInput!): Customer
+    createPublisher(publisher: PublisherInput!): Publisher
+}

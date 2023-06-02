@@ -1,0 +1,66 @@
+mutation Login($username: String!, $password: String!) {
+    login(
+        jwtRequest: {
+            username: $username,
+            password: $password,
+        }
+    ) {
+        refreshToken,
+        accessToken
+    }
+}
+
+mutation Logout($refreshToken: String!) {
+    logout(refreshToken: $refreshToken)
+}
+
+mutation LogoutAllSessions($refreshToken: String!) {
+    logoutAllSessions(refreshToken: $refreshToken)
+}
+
+mutation CreatePublisher($publisher: PublisherInput!) {
+    createPublisher(publisher: $publisher) {
+        id,
+        nameCompany,
+        activitiesCompany,
+        addressCompany,
+        positionInCompany,
+        user {
+            id,
+            username,
+            firstname,
+            lastname,
+            email,
+            roles {
+                id,
+                name
+            }
+        }
+    }
+}
+
+mutation CreateCustomer($customer: CustomerInput!) {
+    createCustomer(customer: $customer) {
+        id
+        telephone,
+        address,
+        user {
+            id,
+            username,
+            firstname,
+            lastname,
+            email,
+            roles {
+                id,
+                name
+            }
+        }
+
+    }
+}
+
+mutation RefreshAccessToken($jwtRefreshRequest: JwtRefreshRequest!) {
+    refreshAccessToken(jwtRefreshRequest: $jwtRefreshRequest) {
+        accessToken
+    }
+}
