@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  database:
+    container_name: Postgres
+    image: postgres:14-alpine3.17
+    env_file:
+      - ./backend/.env
+  backend:
+    container_name: Java-spring-coursework
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+      - ./backend/.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+  frontend:
+    container_name: React-coursework
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - dist_data:/app/dist
+    depends_on:
+      - backend
+  nginx:
+    container_name: Nginx-coursework
+    image: nginx:1.21.0-alpine
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/etc/nginx/logs
+      - dist_data:/etc/dist/
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+      - frontend
+volumes:
+  dist_data:

@@ -7,7 +7,6 @@ import {SwitchTheme} from "./components/ui/SwitchTheme";
 import {Context} from "./index";
 import {refreshAccessToken} from "./components/graphql/mutation";
 import {useMutation} from "@apollo/client";
-// import dotenv from 'dotenv';
 
 function App() {
     const {store} = useContext(Context);

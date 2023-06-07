@@ -20,6 +20,8 @@ spring:
     cors:
       allow-credentials: true
       allowed-origins:
+        - 'http://${REACT_APP_HOST}/'
+        - http://localhost/
         - http://localhost:3000
         - http://192.168.1.83:3000
 
